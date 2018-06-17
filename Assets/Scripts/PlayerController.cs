@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public float maxSpeed = 4;
     public float jumpForce = 400;
+    public float minHeight, maxHeight;
 
     private float currentSpeed;
     private Rigidbody rb;
@@ -28,9 +29,17 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
         onGround = Physics.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
+        animator.SetBool("OnGround", onGround);
+        animator.SetBool("Dead", isDead);
+
         if (Input.GetButtonDown("Jump") && onGround)
         {
             jump = true;
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            animator.SetTrigger("Attack");
         }
 	}
 
@@ -48,6 +57,11 @@ public class PlayerController : MonoBehaviour {
 
             rb.velocity = new Vector3(h * currentSpeed, rb.velocity.y, z * currentSpeed);
 
+            if (onGround)
+            {
+                animator.SetFloat("Speed", Mathf.Abs(rb.velocity.magnitude));
+            }
+
             if ((h > 0 && !facingRight) || (h < 0 && facingRight))
             {
                 Flip();
@@ -59,6 +73,12 @@ public class PlayerController : MonoBehaviour {
 
                 rb.AddForce(Vector3.up * jumpForce);
             }
+
+            float minWidth = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10)).x;
+            float maxWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 10)).x;
+            rb.position = new Vector3(Mathf.Clamp(rb.position.x, minWidth + 1, maxWidth - 1), 
+                rb.position.y, 
+                Mathf.Clamp(rb.position.z, minHeight + 1, maxHeight - 1));
         }
     }
 
@@ -69,5 +89,15 @@ public class PlayerController : MonoBehaviour {
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    public void ZeroSpeed()
+    {
+        currentSpeed = 0;
+    }
+
+    public void ResetSpeed()
+    {
+        currentSpeed = maxSpeed;
     }
 }
