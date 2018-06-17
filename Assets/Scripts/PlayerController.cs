@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
 
             if (onGround)
             {
-                animator.SetFloat("Speed", Mathf.Abs(rb.velocity.magnitude));
+                animator.SetFloat("Speed", Mathf.Abs(h));
             }
 
             if ((h > 0 && !facingRight) || (h < 0 && facingRight))
@@ -76,9 +76,9 @@ public class PlayerController : MonoBehaviour {
 
             float minWidth = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10)).x;
             float maxWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 10)).x;
-            rb.position = new Vector3(Mathf.Clamp(rb.position.x, minWidth + 1, maxWidth - 1), 
+            rb.position = new Vector3(Mathf.Clamp(rb.position.x, minWidth + 0.01f, maxWidth - 0.01f), 
                 rb.position.y, 
-                Mathf.Clamp(rb.position.z, minHeight + 1, maxHeight - 1));
+                Mathf.Clamp(rb.position.z, minHeight + 0.01f, maxHeight - 0.01f));
         }
     }
 
