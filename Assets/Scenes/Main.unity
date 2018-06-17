@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 1810410727}
   - component: {fileID: 1810410726}
   - component: {fileID: 1810410725}
+  - component: {fileID: 1810410728}
   m_Layer: 0
   m_Name: Player Knight
   m_TagString: Untagged
@@ -398,6 +399,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &1810410728
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810410722}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3e73cf8cda34ca6469e17c8c8b33d678, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1946072384
 GameObject:
   m_ObjectHideFlags: 0
